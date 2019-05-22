@@ -41,8 +41,6 @@ The following example will animate from 0% to 45% at a duration of 3 seconds.
 />
 ```
 
-![image](colorchange.gif)
-
 If you want the color to change with the progress, you can use the `fullColor` prop.
 
 ```js

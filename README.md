@@ -13,7 +13,7 @@ This component also sets `useNativeDriver: true`, meaning that all animation is 
 
 ## Installation
 
-    `npm i --save react-native-progress-wheel
+    npm i --save react-native-progress-wheel
 
 ## Usage
 ```js

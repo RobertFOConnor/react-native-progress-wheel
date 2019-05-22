@@ -21,7 +21,7 @@ class App extends Component {
         return (
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#334'}}>
                 <AnimatedProgressWheel duration={1000}
-                                       ref={ref => this.circleProgress = ref} size={200} width={14}/>
+                                       ref={ref => this.circleProgress = ref} size={200} width={14} fullColor={'red'}/>
                 <View style={{height: 40}}/>
                 <AnimatedProgressWheel ref={ref => this.circleProgress2 = ref} size={120} width={20} color={'yellow'}
                                        backgroundColor={'orange'}/>

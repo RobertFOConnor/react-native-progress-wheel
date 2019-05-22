@@ -39,6 +39,10 @@ class AnimatedProgressWheel extends PureComponent {
     interpolateRotationTwoOpacity = () =>
         this.interpolateAnimVal([50, 50.01], [0, 1]);
 
+    interpolateColorOpacity = () =>
+        this.interpolateAnimVal([0, 100], [0, 1]);
+
+
     animateTo = (toValue, duration = this.props.duration, easing = Easing.easeInOut) =>
         Animated.timing(this.state.animatedVal, {
             toValue,
@@ -47,7 +51,7 @@ class AnimatedProgressWheel extends PureComponent {
             useNativeDriver: true,
         }).start();
 
-    circleHalf = (styles, isSecondHalf) =>
+    circleHalf = (styles, isSecondHalf, color = this.props.color) =>
         <Animated.View style={[
             styles.container,
             {
@@ -58,12 +62,13 @@ class AnimatedProgressWheel extends PureComponent {
                 bottom: 0,
                 transform: [{rotate: '180deg'}]
             }]}>
-                <View style={styles.circleArc}/>
+                <View style={[styles.circleArc, {borderColor: color}]}/>
             </View>
         </Animated.View>;
 
     render() {
         const styles = generateStyles(this.props);
+        const {fullColor} = this.props;
 
         return (
             <View style={styles.container}>
@@ -75,6 +80,18 @@ class AnimatedProgressWheel extends PureComponent {
                 <View style={styles.secondHalfContainer}>
                     {this.circleHalf(styles, true)}
                 </View>
+                {fullColor && (
+                    <Animated.View style={{position: 'absolute', opacity: this.interpolateColorOpacity()}}>
+                        <View style={styles.background}/>
+                        {this.circleHalf(styles, false, fullColor)}
+                        <View style={styles.halfCircle}>
+                            <View style={styles.cutOff}/>
+                        </View>
+                        <View style={styles.secondHalfContainer}>
+                            {this.circleHalf(styles, true, fullColor)}
+                        </View>
+                    </Animated.View>
+                )}
             </View>
         );
     }
@@ -88,6 +105,7 @@ AnimatedProgressWheel.defaultProps = {
     progress: 0,
     duration: 600,
     animateFromValue: -1,
+    fullColor: null,
 };
 
 AnimatedProgressWheel.propTypes = {
@@ -98,6 +116,7 @@ AnimatedProgressWheel.propTypes = {
     progress: PropTypes.number,
     duration: PropTypes.number,
     animateFromValue: PropTypes.number,
+    fullColor: PropTypes.string,
 };
 
 const generateStyles = ({size, width, color, backgroundColor}) =>

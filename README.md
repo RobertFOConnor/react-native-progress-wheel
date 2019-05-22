@@ -53,6 +53,16 @@ If you want the color to change with the progress, you can use the `fullColor` p
 
 ![image](colorchange.gif)
 
+The progress wheel can be updated using state variables.
+
+```js
+<AnimatedProgressWheel
+    progress={this.state.sliderProgress}
+/>
+```
+
+![image](state.gif)
+
 You can also use a ref to call the components 'animateTo' method to update the progress wheel.
 
 ```js

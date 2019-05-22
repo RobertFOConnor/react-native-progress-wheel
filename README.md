@@ -8,7 +8,7 @@ React Native component for creating natively animated, circular progress wheel.
 
 ## Why use this component
 
-This implementation is 100% react-native, meaning you do not need to use any additional libraries such as 'react-native-svg'. 😱
+This implementation is 100% JS, meaning you do not need to use any additional libraries such as 'react-native-svg' and you don't need to do any linking. 😱
 This component also sets `useNativeDriver: true`, meaning that all animation is done smoothly on the native side.💖
 
 ## Installation
@@ -66,6 +66,9 @@ Name        | Arguments                                                         
 ------------|-----------                                                          |----------------
 animateTo   | (toVal: number, duration: number, ease: function)                   | Animate the progress bar to a specific value
 
+## FAQ
+Q: Does it work in Expo?
+A: Yes it does.
 
 Enjoy making smooth animated designs that use the native driver and DON'T require any additional dependencies.
 If you like this library please give it a star on GitHub! ⭐️

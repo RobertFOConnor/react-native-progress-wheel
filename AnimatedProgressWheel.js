@@ -2,7 +2,7 @@ import React, {PureComponent} from 'react';
 import {View, Animated, StyleSheet, Easing} from 'react-native';
 import PropTypes from 'prop-types';
 
-class CircleProgress extends PureComponent {
+class AnimatedProgressWheel extends PureComponent {
 
     state = {
         animatedVal: new Animated.Value(0),
@@ -80,7 +80,7 @@ class CircleProgress extends PureComponent {
     }
 }
 
-CircleProgress.defaultProps = {
+AnimatedProgressWheel.defaultProps = {
     color: 'white',
     backgroundColor: 'gray',
     size: 200,
@@ -90,7 +90,7 @@ CircleProgress.defaultProps = {
     animateFromValue: -1,
 };
 
-CircleProgress.propTypes = {
+AnimatedProgressWheel.propTypes = {
     color: PropTypes.string,
     backgroundColor: PropTypes.string,
     size: PropTypes.number,
@@ -139,4 +139,4 @@ const generateStyles = ({size, width, color, backgroundColor}) =>
         },
     });
 
-export default CircleProgress;
+export default AnimatedProgressWheel;

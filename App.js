@@ -1,33 +1,41 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Slider} from 'react-native';
-import CircleProgress from './CircleProgress';
+import {View, TouchableOpacity, Text} from 'react-native';
+import AnimatedProgressWheel from './AnimatedProgressWheel';
 
-export default class App extends Component {
+class App extends Component {
 
     state = {
-        progress: 40,
+        progress: 0,
+    };
+
+    setNewval = () => {
+        const newVal = Math.floor(Math.random() * 100) + 1;
+        this.setState({progress: newVal});
+        this.circleProgress.animateTo(newVal);
+        this.circleProgress2.animateTo(newVal);
+        this.circleProgress3.animateTo(newVal);
     };
 
     render() {
+
         return (
-            <View style={styles.container}>
-                <CircleProgress progress={this.state.progress} animateFromValue={0}/>
-                <Slider
-                    style={{width: 200}}
-                    minimumValue={0}
-                    maximumValue={100}
-                    value={this.state.progress}
-                    onValueChange={(value) => this.setState({progress: value})}/>
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#334'}}>
+                <AnimatedProgressWheel duration={1000}
+                                       ref={ref => this.circleProgress = ref} size={200} width={14}/>
+                <View style={{height: 40}}/>
+                <AnimatedProgressWheel ref={ref => this.circleProgress2 = ref} size={120} width={20} color={'yellow'}
+                                       backgroundColor={'orange'}/>
+                <View style={{height: 40}}/>
+                <AnimatedProgressWheel ref={ref => this.circleProgress3 = ref} size={100} width={30}
+                                       color={'lightblue'}
+                                       backgroundColor={'#556'}/>
+                <View style={{height: 40}}/>
+                <TouchableOpacity onPress={this.setNewval}>
+                    <Text style={{padding: 20, fontSize: 40, color: 'white'}}>{this.state.progress}%</Text>
+                </TouchableOpacity>
             </View>
         );
     }
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#334',
-    },
-});
+export default App;

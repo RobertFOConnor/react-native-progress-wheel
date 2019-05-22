@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {Fragment, PureComponent} from 'react';
 import {View, Animated, StyleSheet, Easing} from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -51,7 +51,7 @@ class AnimatedProgressWheel extends PureComponent {
             useNativeDriver: true,
         }).start();
 
-    circleHalf = (styles, isSecondHalf, color = this.props.color) =>
+    circleHalf = (styles, isSecondHalf, color) =>
         <Animated.View style={[
             styles.container,
             {
@@ -66,30 +66,28 @@ class AnimatedProgressWheel extends PureComponent {
             </View>
         </Animated.View>;
 
+    renderLoader = (styles, color = this.props.color) =>
+        <Fragment>
+            <View style={styles.background}/>
+            {this.circleHalf(styles, false, color)}
+            <View style={styles.halfCircle}>
+                <View style={styles.cutOff}/>
+            </View>
+            <View style={styles.secondHalfContainer}>
+                {this.circleHalf(styles, true, color)}
+            </View>
+        </Fragment>;
+
     render() {
         const styles = generateStyles(this.props);
         const {fullColor} = this.props;
 
         return (
             <View style={styles.container}>
-                <View style={styles.background}/>
-                {this.circleHalf(styles)}
-                <View style={styles.halfCircle}>
-                    <View style={styles.cutOff}/>
-                </View>
-                <View style={styles.secondHalfContainer}>
-                    {this.circleHalf(styles, true)}
-                </View>
+                {this.renderLoader(styles)}
                 {fullColor && (
                     <Animated.View style={{position: 'absolute', opacity: this.interpolateColorOpacity()}}>
-                        <View style={styles.background}/>
-                        {this.circleHalf(styles, false, fullColor)}
-                        <View style={styles.halfCircle}>
-                            <View style={styles.cutOff}/>
-                        </View>
-                        <View style={styles.secondHalfContainer}>
-                            {this.circleHalf(styles, true, fullColor)}
-                        </View>
+                        {this.renderLoader(styles, fullColor)}
                     </Animated.View>
                 )}
             </View>

@@ -51,7 +51,7 @@ If you want the color to change with the progress, you can use the `fullColor` p
 />
 ```
 
-![image](colorchange.gif =250x250)
+![image](colorchange.gif)
 
 You can also use a ref to call the components 'animateTo' method to update the progress wheel.
 

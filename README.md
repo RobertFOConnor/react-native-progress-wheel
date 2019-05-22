@@ -17,7 +17,7 @@ This component also sets `useNativeDriver: true`, meaning that all animation is 
 
 ## Usage
 ```js
-import { AnimatedProgressWheel } from 'react-native-progress-wheel';
+import AnimatedProgressWheel from 'react-native-progress-wheel';
 
 <AnimatedProgressWheel 
     size={120} 

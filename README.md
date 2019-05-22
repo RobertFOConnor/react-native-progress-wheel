@@ -33,6 +33,20 @@ The following example will animate from 0% to 45% at a duration of 3 seconds.
 
 ```js
 <AnimatedProgressWheel
+    progress={100}
+    animateFromValue={0}
+    duration={5000}
+    color={'white'}
+    fullColor={'red'}
+/>
+```
+
+![image](colorchange.gif)
+
+If you want the color to change with the progress, you can use the `fullColor` prop.
+
+```js
+<AnimatedProgressWheel
     progress={45}
     animateFromValue={0}
     duration={3000}

@@ -58,6 +58,7 @@ backgroundColor  | string                 | gray                    | Color of t
 progress         | number (0, 100)        | 0                       | Angle from which the progress starts from
 animateFromValue | number (0, 100)        | -1                      | Starting value to animate to progres when component is mounted
 duration         | number                 | 600                     | Duration at which to animate the progress.
+fullColor        | string                 | null                    | Color of the progress line when 100%
 
 
 `AnimatedProgressWheel` exposes the following functions:

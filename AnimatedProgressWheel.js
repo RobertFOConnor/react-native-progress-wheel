@@ -43,56 +43,65 @@ class AnimatedProgressWheel extends PureComponent {
         this.interpolateAnimVal([0, 100], [0, 1]);
 
 
-    animateTo = (toValue, duration = this.props.duration, easing = Easing.easeInOut) =>
+    animateTo = (toValue, duration = this.props.duration, easing = Easing.easeInOut) => {
+        const { onAnimationComplete } = this.props;
         Animated.timing(this.state.animatedVal, {
             toValue,
             duration,
             easing,
             useNativeDriver: true,
-        }).start();
+        }).start(async (status) => {onAnimationComplete(status);});
+    }
+
+    resetAnimation = (progress = this.props.progress) => 
+        Animated.timing(this.state.animatedVal, {
+            duration: 0,
+            toValue: progress,
+            useNativeDriver: true,
+          }).start();
 
     circleHalf = (styles, isSecondHalf, color) =>
-        <Animated.View style={[
+<Animated.View style={[
             styles.container,
-            {
-                opacity: isSecondHalf ? this.interpolateRotationTwoOpacity() : 1,
-                transform: [{rotate: this.interpolateRotation(isSecondHalf)}]
-            }]}>
-            <View style={[styles.halfCircle, isSecondHalf && {
-                bottom: 0,
-                transform: [{rotate: '180deg'}]
-            }]}>
-                <View style={[styles.circleArc, {borderColor: color}]}/>
-            </View>
-        </Animated.View>;
+{
+    opacity: isSecondHalf ? this.interpolateRotationTwoOpacity() : 1,
+    transform: [{rotate: this.interpolateRotation(isSecondHalf)}]
+}]}>
+<View style={[styles.halfCircle, isSecondHalf && {
+    bottom: 0,
+    transform: [{rotate: '180deg'}]
+}]}>
+<View style={[styles.circleArc, {borderColor: color}]}/>
+</View>
+</Animated.View>;
 
-    renderLoader = (styles, color = this.props.color) =>
-        <Fragment>
-            <View style={styles.background}/>
-            {this.circleHalf(styles, false, color)}
-            <View style={styles.halfCircle}>
-                <View style={styles.cutOff}/>
-            </View>
-            <View style={styles.secondHalfContainer}>
-                {this.circleHalf(styles, true, color)}
-            </View>
-        </Fragment>;
+renderLoader = (styles, color = this.props.color) =>
+<Fragment>
+<View style={styles.background}/>
+{this.circleHalf(styles, false, color)}
+<View style={styles.halfCircle}>
+    <View style={styles.cutOff}/>
+</View>
+<View style={styles.secondHalfContainer}>
+    {this.circleHalf(styles, true, color)}
+    </View>
+    </Fragment>;
 
-    render() {
-        const styles = generateStyles(this.props);
-        const {fullColor} = this.props;
+render() {
+    const styles = generateStyles(this.props);
+    const {fullColor} = this.props;
 
-        return (
-            <View style={styles.container}>
-                {this.renderLoader(styles)}
-                {fullColor && (
-                    <Animated.View style={{position: 'absolute', opacity: this.interpolateColorOpacity()}}>
-                        {this.renderLoader(styles, fullColor)}
-                    </Animated.View>
-                )}
-            </View>
-        );
-    }
+    return (
+        <View style={styles.container}>
+        {this.renderLoader(styles)}
+    {fullColor && (
+    <Animated.View style={{position: 'absolute', opacity: this.interpolateColorOpacity()}}>
+        {this.renderLoader(styles, fullColor)}
+    </Animated.View>
+    )}
+</View>
+);
+}
 }
 
 AnimatedProgressWheel.defaultProps = {
@@ -115,6 +124,7 @@ AnimatedProgressWheel.propTypes = {
     duration: PropTypes.number,
     animateFromValue: PropTypes.number,
     fullColor: PropTypes.string,
+    onAnimationComplete: PropTypes.func,
 };
 
 const generateStyles = ({size, width, color, backgroundColor}) =>

@@ -44,21 +44,16 @@ class AnimatedProgressWheel extends PureComponent {
 
 
     animateTo = (toValue, duration = this.props.duration, easing = Easing.easeInOut) => {
-        const { onAnimationComplete } = this.props;
         Animated.timing(this.state.animatedVal, {
             toValue,
             duration,
             easing,
             useNativeDriver: true,
-        }).start(async (status) => {onAnimationComplete(status);});
+        }).start(async (status) => {this.props.onAnimationComplete(status);});
     }
 
     resetAnimation = (progress = this.props.progress) => 
-        Animated.timing(this.state.animatedVal, {
-            duration: 0,
-            toValue: progress,
-            useNativeDriver: true,
-          }).start();
+        this.state.animatedVal.setValue(progress)
 
     circleHalf = (styles, isSecondHalf, color) =>
 <Animated.View style={[
@@ -113,6 +108,7 @@ AnimatedProgressWheel.defaultProps = {
     duration: 600,
     animateFromValue: -1,
     fullColor: null,
+    onAnimationComplete: () => null,
 };
 
 AnimatedProgressWheel.propTypes = {

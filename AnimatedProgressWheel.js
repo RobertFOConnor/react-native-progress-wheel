@@ -108,7 +108,7 @@ AnimatedProgressWheel.defaultProps = {
     duration: 600,
     animateFromValue: -1,
     fullColor: null,
-    onAnimationComplete: () => null,
+    onAnimationComplete: () => {},
 };
 
 AnimatedProgressWheel.propTypes = {

@@ -1,9 +1,7 @@
 {
-  "name": "ReactNativeCircleProgress",
-  "version": "0.0.2",
-  "private": true,
+  "name": "react-native-progress-wheel",
+  "version": "0.0.3",
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest"
   },
   "dependencies": {

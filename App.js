@@ -19,19 +19,19 @@ class App extends Component {
     render() {
 
         return (
-            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#334'}}>
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff'}}>
                 <AnimatedProgressWheel duration={400}
-                                       ref={ref => this.circleProgress = ref} size={200} progress={100} animateFromValue={0} width={24} fullColor={'red'}/>
+                                       ref={ref => this.circleProgress = ref} size={200} progress={100} animateFromValue={0} width={24} color={'pink'} fullColor={'red'}/>
                 <View style={{height: 40}}/>
-                <AnimatedProgressWheel ref={ref => this.circleProgress2 = ref} size={120} width={20} color={'yellow'}
-                                       backgroundColor={'orange'}/>
+                <AnimatedProgressWheel ref={ref => this.circleProgress2 = ref} size={120} width={20} color={'black'}
+                                       backgroundColor={'#f8f8f8'} containerColor={'#fff'}/>
                 <View style={{height: 40}}/>
                 <AnimatedProgressWheel ref={ref => this.circleProgress3 = ref} size={100} width={30}
                                        color={'lightblue'}
                                        backgroundColor={'#556'}/>
                 <View style={{height: 40}}/>
                 <TouchableOpacity onPress={this.setNewval}>
-                    <Text style={{padding: 20, fontSize: 40, color: 'white'}}>{this.state.progress}%</Text>
+                    <Text style={{padding: 20, fontSize: 40, color: 'grey'}}>{this.state.progress}%</Text>
                 </TouchableOpacity>
             </View>
         );

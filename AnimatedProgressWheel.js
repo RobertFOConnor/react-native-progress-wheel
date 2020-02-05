@@ -123,11 +123,13 @@ AnimatedProgressWheel.propTypes = {
     onAnimationComplete: PropTypes.func,
 };
 
-const generateStyles = ({size, width, color, backgroundColor}) =>
+const generateStyles = ({size, width, color, backgroundColor, containerColor}) =>
     StyleSheet.create({
         container: {
             width: size,
             height: size,
+            borderRadius: size / 2,
+            overflow: 'hidden',
         },
         background: {
             width: size,
@@ -135,9 +137,10 @@ const generateStyles = ({size, width, color, backgroundColor}) =>
             borderRadius: size / 2,
             borderWidth: width,
             borderColor: backgroundColor,
-            position: 'absolute'
+            position: 'absolute',
         },
         cutOff: {
+            backgroundColor: containerColor,
             width: size,
             height: size,
             borderWidth: width,
@@ -145,7 +148,7 @@ const generateStyles = ({size, width, color, backgroundColor}) =>
             borderRadius: size / 2,
         },
         secondHalfContainer: {
-            position: 'absolute'
+            position: 'absolute',
         },
         halfCircle: {
             width: size,

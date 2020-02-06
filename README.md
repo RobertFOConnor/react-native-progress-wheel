@@ -1,4 +1,6 @@
 # react-native-progress-wheel
+<a href="https://www.npmjs.com/package/react-native-progress-wheel"><img src="https://img.shields.io/npm/dm/react-native-progress-wheel.svg?style=flat-square" alt="NPM downloads"></a>
+  <a href="https://www.npmjs.com/package/react-native-progress-wheel"><img src="https://img.shields.io/npm/v/react-native-progress-wheel.svg?style=flat-square" alt="NPM version"></a>
 
 React Native component for creating natively animated, circular progress wheel.
 

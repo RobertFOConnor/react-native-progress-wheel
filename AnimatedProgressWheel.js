@@ -129,7 +129,6 @@ const generateStyles = ({size, width, color, backgroundColor, containerColor}) =
             width: size,
             height: size,
             borderRadius: size / 2,
-            overflow: 'hidden',
         },
         background: {
             width: size,

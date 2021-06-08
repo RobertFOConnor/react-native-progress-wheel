@@ -85,17 +85,18 @@ this.progressWheel.animateTo(100, 2000, Easing.quad); // Will fill the progress 
 
 You can configure the component using these props:
 
-Name             | Type                   | Default value           | Description
------------------|------------------------|-------------------------|--------------
-size             | number                 | 200                     | Width and height of circle
-width            | number                 | 25                      | Thickness of the progress line
-color            | string                 | white                   | Color of the progress line
-backgroundColor  | string                 | gray                    | Color of the background progress line
-containerColor   | string                 | null                    | Color of the container you are placing this in (only needed if you get bleed)
-progress         | number (0, 100)        | 0                       | Angle from which the progress starts from
-animateFromValue | number (0, 100)        | -1                      | Starting value to animate to progres when component is mounted
-duration         | number                 | 600                     | Duration at which to animate the progress.
-fullColor        | string                 | null                    | Color of the progress line when 100%
+Name                  | Type                   | Default value           | Description
+----------------------|------------------------|-------------------------|--------------
+size                  | number                 | 200                     | Width and height of circle
+width                 | number                 | 25                      | Thickness of the progress line
+color                 | string                 | white                   | Color of the progress line
+backgroundColor       | string                 | gray                    | Color of the background progress line
+containerColor        | string                 | null                    | Color of the container you are placing this in (only needed if you get bleed)
+progress              | number (0, 100)        | 0                       | Angle from which the progress starts from
+animateFromValue      | number (0, 100)        | -1                      | Starting value to animate to progres when component is mounted
+duration              | number                 | 600                     | Duration at which to animate the progress.
+fullColor             | string                 | null                    | Color of the progress line when 100%
+onAnimationComplete   | function               | () = {}                 | Optional function that will be called after the animation finished running normally or when the animation is done because stop() was called on it before it could finish
 
 
 `AnimatedProgressWheel` exposes the following functions:

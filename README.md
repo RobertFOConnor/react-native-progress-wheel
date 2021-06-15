@@ -91,7 +91,6 @@ size                  | number                 | 200                     | Width
 width                 | number                 | 25                      | Thickness of the progress line
 color                 | string                 | white                   | Color of the progress line
 backgroundColor       | string                 | gray                    | Color of the background progress line
-containerColor        | string                 | null                    | Color of the container you are placing this in (only needed if you get bleed)
 progress              | number (0, 100)        | 0                       | Angle from which the progress starts from
 animateFromValue      | number (0, 100)        | -1                      | Starting value to animate to progres when component is mounted
 duration              | number                 | 600                     | Duration at which to animate the progress.

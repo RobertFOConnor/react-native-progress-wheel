@@ -1,6 +1,6 @@
-import React, {Fragment, PureComponent} from 'react';
-import {View, Animated, StyleSheet, Easing} from 'react-native';
-import PropTypes from 'prop-types';
+import React, { Fragment, PureComponent } from "react";
+import { View, Animated, StyleSheet, Easing } from "react-native";
+import PropTypes from "prop-types";
 
 class AnimatedProgressWheel extends PureComponent {
   state = {
@@ -8,15 +8,14 @@ class AnimatedProgressWheel extends PureComponent {
   };
 
   componentDidMount() {
-    const {animateFromValue, progress} = this.props;
-    const {animatedVal} = this.state;
+    const { animateFromValue, progress } = this.props;
+    const { animatedVal } = this.state;
 
     if (animateFromValue >= 0) {
       animatedVal.setValue(animateFromValue);
-      this.animateTo(progress);
-    } else {
-      animatedVal.setValue(progress);
+      return this.animateTo(progress);
     }
+    animatedVal.setValue(progress);
   }
 
   componentDidUpdate(prevProps) {
@@ -29,13 +28,13 @@ class AnimatedProgressWheel extends PureComponent {
     this.state.animatedVal.interpolate({
       inputRange,
       outputRange,
-      extrapolate: 'clamp',
+      extrapolate: "clamp",
     });
 
-  interpolateRotation = isSecondHalf =>
+  interpolateRotation = (isSecondHalf) =>
     this.interpolateAnimVal(isSecondHalf ? [50, 100] : [0, 50], [
-      '0deg',
-      '180deg',
+      "0deg",
+      "180deg",
     ]);
 
   interpolateRotationTwoOpacity = () =>
@@ -46,14 +45,14 @@ class AnimatedProgressWheel extends PureComponent {
   animateTo = (
     toValue,
     duration = this.props.duration,
-    easing = Easing.easeInOut,
+    easing = Easing.easeInOut
   ) => {
     Animated.timing(this.state.animatedVal, {
       toValue,
       duration,
       easing,
       useNativeDriver: true,
-    }).start(async status => {
+    }).start(async (status) => {
       this.props.onAnimationComplete(status);
     });
   };
@@ -67,18 +66,20 @@ class AnimatedProgressWheel extends PureComponent {
         styles.container,
         {
           opacity: isSecondHalf ? this.interpolateRotationTwoOpacity() : 1,
-          transform: [{rotate: this.interpolateRotation(isSecondHalf)}],
+          transform: [{ rotate: this.interpolateRotation(isSecondHalf) }],
         },
-      ]}>
+      ]}
+    >
       <View
         style={[
           styles.halfCircle,
           isSecondHalf && {
             bottom: 0,
-            transform: [{rotate: '180deg'}],
+            transform: [{ rotate: "180deg" }],
           },
-        ]}>
-        <View style={[styles.circleArc, {borderColor: color}]} />
+        ]}
+      >
+        <View style={[styles.circleArc, { borderColor: color }]} />
       </View>
     </Animated.View>
   );
@@ -98,7 +99,7 @@ class AnimatedProgressWheel extends PureComponent {
 
   render() {
     const styles = generateStyles(this.props);
-    const {fullColor} = this.props;
+    const { fullColor } = this.props;
 
     return (
       <View style={styles.container}>
@@ -106,9 +107,10 @@ class AnimatedProgressWheel extends PureComponent {
         {fullColor && (
           <Animated.View
             style={{
-              position: 'absolute',
+              position: "absolute",
               opacity: this.interpolateColorOpacity(),
-            }}>
+            }}
+          >
             {this.renderLoader(styles, fullColor)}
           </Animated.View>
         )}
@@ -118,8 +120,8 @@ class AnimatedProgressWheel extends PureComponent {
 }
 
 AnimatedProgressWheel.defaultProps = {
-  color: 'white',
-  backgroundColor: 'gray',
+  color: "white",
+  backgroundColor: "gray",
   size: 200,
   width: 25,
   progress: 0,
@@ -153,7 +155,7 @@ const generateStyles = ({
       width: size,
       height: size,
       borderRadius: size / 2,
-      overflow: 'hidden',
+      overflow: "hidden",
     },
     background: {
       width: size,
@@ -161,7 +163,7 @@ const generateStyles = ({
       borderRadius: size / 2,
       borderWidth: width,
       borderColor: backgroundColor,
-      position: 'absolute',
+      position: "absolute",
     },
     cutOff: {
       backgroundColor: containerColor,
@@ -172,13 +174,13 @@ const generateStyles = ({
       borderRadius: size / 2,
     },
     secondHalfContainer: {
-      position: 'absolute',
+      position: "absolute",
     },
     halfCircle: {
       width: size,
       height: size / 2,
-      overflow: 'hidden',
-      position: 'absolute',
+      overflow: "hidden",
+      position: "absolute",
     },
     circleArc: {
       width: size,

@@ -52,20 +52,6 @@ The following example will animate from 0% to 45% at a duration of 3 seconds.
 />
 ```
 
-If you want the color to change with the progress, you can use the `fullColor` prop.
-
-```js
-<AnimatedProgressWheel
-    progress={100}
-    animateFromValue={0}
-    duration={5000}
-    color={'white'}
-    fullColor={'red'}
-/>
-```
-
-![image](colorchange.gif)
-
 The progress wheel can be updated using state variables.
 
 ```js
@@ -93,16 +79,9 @@ width            | number                 | 25                      | Thickness 
 color            | string                 | white                   | Color of the progress line
 backgroundColor  | string                 | gray                    | Color of the background progress line
 progress         | number (0, 100)        | 0                       | Angle from which the progress starts from
+rounded          | boolean                | false                   | Rounds edges
 animateFromValue | number (0, 100)        | -1                      | Starting value to animate to progres when component is mounted
 duration         | number                 | 600                     | Duration at which to animate the progress.
-fullColor        | string                 | null                    | Color of the progress line when 100%
-
-
-`AnimatedProgressWheel` exposes the following functions:
-
-Name        | Arguments                                                           | Description
-------------|-----------                                                          |----------------
-animateTo   | (toVal: number, duration: number, ease: function)                   | Animate the progress bar to a specific value
 
 ## FAQ
 Q: Does it work in Expo?

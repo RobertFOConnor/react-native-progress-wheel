@@ -62,12 +62,6 @@ The progress wheel can be updated using state variables.
 
 ![image](state.gif)
 
-You can also use a ref to call the components 'animateTo' method to update the progress wheel.
-
-```js
-this.progressWheel.animateTo(100, 2000, Easing.quad); // Will fill the progress bar linearly in 2 seconds
-```
-
 ## Configuration
 
 You can configure the component using these props:

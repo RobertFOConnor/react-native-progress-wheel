@@ -1,0 +1,40 @@
+{
+    "name": "react-native-progress-wheel",
+    "version": "2.0.3",
+    "description": "A better way to show animated progress in a circle.",
+    "main": "dist/index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "types": "dist/index.d.ts",
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/RobertFOConnor/react-native-progress-wheel.git"
+    },
+    "keywords": [
+      "progress",
+      "circle",
+      "chart",
+      "pie",
+      "animated",
+      "animation",
+      "section",
+      "stats",
+      "arc",
+      "svg",
+      "design",
+      "react",
+      "native",
+      "points"
+    ],
+    "author": "Robert O'Connor",
+    "license": "ISC",
+    "bugs": {
+      "url": "https://github.com/RobertFOConnor/react-native-progress-wheel/issues"
+    },
+    "homepage": "https://github.com/RobertFOConnor/react-native-progress-wheel#readme",
+    "devDependencies": {
+      "typescript": "^5.2.2"
+    }
+  }
+  

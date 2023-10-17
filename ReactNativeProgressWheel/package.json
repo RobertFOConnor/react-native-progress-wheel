@@ -11,8 +11,7 @@
   },
   "dependencies": {
     "react": "18.2.0",
-    "react-native": "0.72.6",
-    "react-native-progress-wheel": "^2.0.2"
+    "react-native": "0.72.6"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

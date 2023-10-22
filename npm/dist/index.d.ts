@@ -1,5 +1,5 @@
 import React from 'react';
-import { EasingFunction } from 'react-native';
+import { EasingFunction, TextStyle, ViewStyle } from 'react-native';
 interface Props {
     color: string;
     backgroundColor: string;
@@ -7,12 +7,19 @@ interface Props {
     width: number;
     progress?: number;
     duration?: number;
-    rounded?: boolean;
     animateFromValue?: number;
     containerColor?: string;
+    rounded?: boolean;
+    showProgressLabel?: boolean;
+    showPercentageSymbol?: boolean;
     delay?: number;
+    max?: number;
+    subtitle?: string;
+    rotation?: string;
+    labelStyle?: ViewStyle | TextStyle;
+    subtitleStyle?: ViewStyle | TextStyle;
     easing?: EasingFunction;
     onAnimationComplete?: (status: any) => void;
 }
-declare const AnimatedProgressWheel: ({ animateFromValue, progress, duration, onAnimationComplete, size, width, color, delay, rounded, backgroundColor, easing, containerColor, }: Props) => React.JSX.Element;
+declare const AnimatedProgressWheel: ({ animateFromValue, progress, duration, onAnimationComplete, size, width, color, rotation, subtitle, delay, max, rounded, showProgressLabel, showPercentageSymbol, backgroundColor, labelStyle, subtitleStyle, easing, containerColor, }: Props) => React.JSX.Element;
 export default AnimatedProgressWheel;

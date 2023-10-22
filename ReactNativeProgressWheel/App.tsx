@@ -3,37 +3,26 @@ import {StyleSheet, View} from 'react-native';
 import AnimatedProgressWheel from './AnimatedProgressWheel';
 
 function App(): JSX.Element {
-  const size = 300;
-  const progress = 100;
+  const size = 240;
+  const progress = 36;
   const duration = 2500;
-  const width = 24;
+  const width = 10;
   const rounded = true;
+  const color = '#49ccf9';
+  const backgroundColor = '#000079';
 
   return (
     <View style={styles.container}>
       <AnimatedProgressWheel
-        delay={800}
-        color={'#f9114f'}
-        backgroundColor={'#340111'}
-        {...{size, width, duration, progress, rounded}}
+        max={40}
+        showProgressLabel={true}
+        showPercentageSymbol={false}
+        rotation={'-90deg'}
+        labelStyle={styles.progressLabel}
+        subtitle={'Questions out of 40'}
+        subtitleStyle={styles.subtitle}
+        {...{color, backgroundColor, size, width, duration, progress, rounded}}
       />
-      <View style={styles.absolute}>
-        <AnimatedProgressWheel
-          size={300 - width * 2 + 2}
-          delay={300}
-          color={'#ccfc00'}
-          backgroundColor={'#1b3400'}
-          {...{width, duration, progress, rounded}}
-        />
-      </View>
-      <View style={styles.absolute}>
-        <AnimatedProgressWheel
-          size={300 - width * 4 + 4}
-          color={'#09e4e0'}
-          backgroundColor={'#012150'}
-          {...{width, duration, progress, rounded}}
-        />
-      </View>
     </View>
   );
 }
@@ -48,6 +37,15 @@ const styles = StyleSheet.create({
   },
   absolute: {
     position: 'absolute',
+  },
+  progressLabel: {
+    color: '#49ccf9',
+    fontWeight: 'bold',
+    fontSize: 56,
+  },
+  subtitle: {
+    fontSize: 14,
+    color: '#49ccf9',
   },
 });
 

@@ -1,5 +1,13 @@
-import React, {Fragment, useEffect, useMemo} from 'react';
-import {Animated, EasingFunction, StyleSheet, View} from 'react-native';
+import React, {Fragment, useEffect, useMemo, useState} from 'react';
+import {
+  Animated,
+  EasingFunction,
+  StyleSheet,
+  Text,
+  TextStyle,
+  View,
+  ViewStyle,
+} from 'react-native';
 
 interface Props {
   color: string;
@@ -11,7 +19,14 @@ interface Props {
   animateFromValue?: number;
   containerColor?: string;
   rounded?: boolean;
+  showProgressLabel?: boolean;
+  showPercentageSymbol?: boolean;
   delay?: number;
+  max?: number;
+  subtitle?: string;
+  rotation?: string;
+  labelStyle?: ViewStyle | TextStyle;
+  subtitleStyle?: ViewStyle | TextStyle;
   easing?: EasingFunction;
   onAnimationComplete?: (status: any) => void;
 }
@@ -24,13 +39,32 @@ const AnimatedProgressWheel = ({
   size,
   width,
   color = 'white',
+  rotation = '0deg',
+  subtitle = '',
   delay = 0,
+  max = 100,
   rounded = false,
+  showProgressLabel = false,
+  showPercentageSymbol = false,
   backgroundColor = 'grey',
+  labelStyle = {},
+  subtitleStyle = {},
   easing,
   containerColor,
 }: Props) => {
+  const [labelValue, setLabelValue] = useState(0);
   const animatedVal = useMemo(() => new Animated.Value(0), []);
+
+  useEffect(() => {
+    if (showProgressLabel) {
+      animatedVal.addListener(({value}) =>
+        setLabelValue(Math.floor((value / 100) * max)),
+      );
+    }
+    return () => {
+      animatedVal.removeAllListeners();
+    };
+  }, [animatedVal, showProgressLabel, max]);
 
   const styles = useMemo(
     () =>
@@ -48,8 +82,8 @@ const AnimatedProgressWheel = ({
     if (animateFromValue >= 0) {
       animatedVal.setValue(animateFromValue);
     }
-    animateTo(progress);
-  }, [animateFromValue, progress]);
+    animateTo((progress / max) * 100);
+  }, [animateFromValue, progress, max]);
 
   const interpolateAnimVal = (
     inputRange: number[],
@@ -144,7 +178,24 @@ const AnimatedProgressWheel = ({
     </Fragment>
   );
 
-  return <View style={styles.container}>{renderLoader()}</View>;
+  return (
+    <View style={styles.container}>
+      <View style={{transform: [{rotate: rotation}]}}>{renderLoader()}</View>
+      {showProgressLabel && (
+        <View style={styles.labelContainer}>
+          {labelValue !== null && (
+            <Text style={[styles.label, labelStyle]}>
+              {labelValue}
+              {showPercentageSymbol ? '%' : ''}
+            </Text>
+          )}
+          {!!subtitle && (
+            <Text style={[styles.label, subtitleStyle]}>{subtitle}</Text>
+          )}
+        </View>
+      )}
+    </View>
+  );
 };
 
 const generateStyles = ({
@@ -215,6 +266,18 @@ const generateStyles = ({
       position: 'absolute',
       width: size,
       height: size,
+    },
+    labelContainer: {
+      position: 'absolute',
+      top: 0,
+      bottom: 0,
+      left: 0,
+      right: 0,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    label: {
+      fontSize: 20,
     },
   });
 

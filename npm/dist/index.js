@@ -26,8 +26,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importStar(require("react"));
 var react_native_1 = require("react-native");
 var AnimatedProgressWheel = function (_a) {
-    var _b = _a.animateFromValue, animateFromValue = _b === void 0 ? -1 : _b, _c = _a.progress, progress = _c === void 0 ? 75 : _c, _d = _a.duration, duration = _d === void 0 ? 600 : _d, onAnimationComplete = _a.onAnimationComplete, size = _a.size, width = _a.width, _e = _a.color, color = _e === void 0 ? 'white' : _e, _f = _a.delay, delay = _f === void 0 ? 0 : _f, _g = _a.rounded, rounded = _g === void 0 ? false : _g, _h = _a.backgroundColor, backgroundColor = _h === void 0 ? 'grey' : _h, easing = _a.easing, containerColor = _a.containerColor;
+    var _b = _a.animateFromValue, animateFromValue = _b === void 0 ? -1 : _b, _c = _a.progress, progress = _c === void 0 ? 75 : _c, _d = _a.duration, duration = _d === void 0 ? 600 : _d, onAnimationComplete = _a.onAnimationComplete, size = _a.size, width = _a.width, _e = _a.color, color = _e === void 0 ? 'white' : _e, _f = _a.rotation, rotation = _f === void 0 ? '0deg' : _f, _g = _a.subtitle, subtitle = _g === void 0 ? '' : _g, _h = _a.delay, delay = _h === void 0 ? 0 : _h, _j = _a.max, max = _j === void 0 ? 100 : _j, _k = _a.rounded, rounded = _k === void 0 ? false : _k, _l = _a.showProgressLabel, showProgressLabel = _l === void 0 ? false : _l, _m = _a.showPercentageSymbol, showPercentageSymbol = _m === void 0 ? false : _m, _o = _a.backgroundColor, backgroundColor = _o === void 0 ? 'grey' : _o, _p = _a.labelStyle, labelStyle = _p === void 0 ? {} : _p, _q = _a.subtitleStyle, subtitleStyle = _q === void 0 ? {} : _q, easing = _a.easing, containerColor = _a.containerColor;
+    var _r = (0, react_1.useState)(0), labelValue = _r[0], setLabelValue = _r[1];
     var animatedVal = (0, react_1.useMemo)(function () { return new react_native_1.Animated.Value(0); }, []);
+    (0, react_1.useEffect)(function () {
+        if (showProgressLabel) {
+            animatedVal.addListener(function (_a) {
+                var value = _a.value;
+                return setLabelValue(Math.floor((value / 100) * max));
+            });
+        }
+        return function () {
+            animatedVal.removeAllListeners();
+        };
+    }, [animatedVal, showProgressLabel, max]);
     var styles = (0, react_1.useMemo)(function () {
         return generateStyles({
             size: size,
@@ -41,8 +53,8 @@ var AnimatedProgressWheel = function (_a) {
         if (animateFromValue >= 0) {
             animatedVal.setValue(animateFromValue);
         }
-        animateTo(progress);
-    }, [animateFromValue, progress]);
+        animateTo((progress / max) * 100);
+    }, [animateFromValue, progress, max]);
     var interpolateAnimVal = function (inputRange, outputRange) {
         return animatedVal.interpolate({
             inputRange: inputRange,
@@ -117,7 +129,16 @@ var AnimatedProgressWheel = function (_a) {
           </react_native_1.Animated.View>
         </>)}
     </react_1.Fragment>); };
-    return <react_native_1.View style={styles.container}>{renderLoader()}</react_native_1.View>;
+    return (<react_native_1.View style={styles.container}>
+      <react_native_1.View style={{ transform: [{ rotate: rotation }] }}>{renderLoader()}</react_native_1.View>
+      {showProgressLabel && (<react_native_1.View style={styles.labelContainer}>
+          {labelValue !== null && (<react_native_1.Text style={[styles.label, labelStyle]}>
+              {labelValue}
+              {showPercentageSymbol ? '%' : ''}
+            </react_native_1.Text>)}
+          {!!subtitle && (<react_native_1.Text style={[styles.label, subtitleStyle]}>{subtitle}</react_native_1.Text>)}
+        </react_native_1.View>)}
+    </react_native_1.View>);
 };
 var generateStyles = function (_a) {
     var size = _a.size, width = _a.width, color = _a.color, backgroundColor = _a.backgroundColor, containerColor = _a.containerColor;
@@ -182,6 +203,18 @@ var generateStyles = function (_a) {
             position: 'absolute',
             width: size,
             height: size,
+        },
+        labelContainer: {
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0,
+            alignItems: 'center',
+            justifyContent: 'center',
+        },
+        label: {
+            fontSize: 20,
         },
     });
 };

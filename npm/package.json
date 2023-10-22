@@ -1,6 +1,6 @@
 {
     "name": "react-native-progress-wheel",
-    "version": "2.0.3",
+    "version": "2.1.0",
     "description": "A better way to show animated progress in a circle.",
     "main": "dist/index.js",
     "scripts": {
